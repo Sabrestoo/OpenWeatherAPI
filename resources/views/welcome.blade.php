@@ -23,7 +23,7 @@
     </head>
     <body class="bg-gradient-to-tr from-blue-200 to-blue-900 min-h-screen">
         <div class="mt-8">
-            <x-weather-widget />
+            <x-weather-widget :currentWeather="$currentWeather"></x-weather-widget>
         </div>
 
     </body>

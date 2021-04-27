@@ -21,16 +21,21 @@ Route::get('/', function () {
     $geoAPI = '44163ddba63942ccb24ab41f22b4a9f3';
     $bounds = '-11.60156,36.31513,22.14844,58.99531';
 
-    $response = Http::get("https://api.opencagedata.com/geocode/v1/json?q={$location}&key={$geoAPI}");
+    $response = Http::get("https://api.opencagedata.com/geocode/v1/json?q={$location}&key={$geoAPI}&countrycode=de");
 
-    dd($response->json());
+    $results = $response->json('results');
+
 //    Weather Api
 
-    $lat = '';
-    $lon = '';
+    $lat = $results[0]['geometry']['lat'];
+    $lng = $results[0]['geometry']['lng'];
     $apiKey = '8c444def6f6d95a5ebf766bdd5b5ad49';
 
-    $response = Http::get("https://api.openweathermap.org/data/2.5/onecall?lat={$lat}&lon={$lon}&appid={$apiKey}");
+    $response = Http::get("https://api.openweathermap.org/data/2.5/onecall?lat={$lat}&lon={$lng}&appid={$apiKey}&units=metric");
+//    $futureWeather = Http::get("");
 
-    return view('welcome');
+    dump($response->json());
+    return view('welcome', [
+        'currentWeather' => $response->json()
+    ]);
 });

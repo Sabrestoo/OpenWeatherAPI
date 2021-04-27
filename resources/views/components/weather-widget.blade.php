@@ -5,16 +5,18 @@
         <div class="current-weather relative">
             <div class="flex items-center justify-between px-4 py-6">
                 <div class="flex-col items-center">
-                    <div class="text-5xl font-semibold">4&#176;C</div>
-                    <div class="text-gray-400">Feels like 5&#176;C</div>
+                    <div class="text-5xl font-semibold">{{ round($currentWeather['current']['temp']) }}&#176;C</div>
+                    <div class="text-gray-400">Feels like {{ round($currentWeather['current']['feels_like']) }}&#176;C</div>
                 </div>
                 {{--                    Description                 --}}
                 <div class="ml-5">
-                    <div class="font-semi-bold">Overcast</div>
+                    <div class="font-semibold">{{ ucfirst($currentWeather['current']['weather'][0]['description']) }}</div>
                     <div class="text-gray-400">Berlin, Germany</div>
                 </div>
 
-                <div class="">ICON</div>
+                <div class="">
+                    <img src="http://openweathermap.org/img/wn/{{ $currentWeather['current']['weather'][0]['icon'] }}@2x.png" alt="weather icon">
+                </div>
             </div>
             <button class="absolute right-0 bottom-0 mb-2 mr-2 text-xs">Toggle</button>
 
